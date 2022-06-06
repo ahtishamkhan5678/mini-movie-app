@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@checkout.in</title>
+    <style>
+    #navbar{
+    display: flex;
+    justify-content: space-between;
+
+}
+#movie{
+    width: 30%;
+    margin: auto;
+    margin-top: 40px;
+
+}
+
+
+
+
+    </style>
+
+
+
+</head>
+<body>
+    <div  id="navbar">
+        <h1>Checkout | Cost :100/seat</h1>
+
+        <h1 id="wallet">0</h1>
+
+    </div>
+    <div id="user-details">
+
+        <form onsubmit="checkBalance()">
+        <input type="text" id="user-details" placeholder="Enter your name" required>
+        <input type="number" id="number_of_seats" placeholder="nuber of seat" required>
+        <input type="submit" id="confirm">
+        
+        
+        
+        </form>
+         
+    </div>
+    <div id="movie">
+
+    </div>
+</body>
+</html>
+<script>
+  let balance=JSON.parse(localStorage.getItem("amount"));
+
+  document.getElementById("wallet").innerText=balance;
+
+  let movie=JSON.parse(localStorage.getItem("movie"));
+
+  let{Poster,Title}=movie;
+  let container=document.getElementById("movie");
+  let img=document.createElement("img");
+
+  img.src=Poster;
+
+  let title=document.createElement("h3");
+
+  title.innerText=Title;
+
+  container.append(img,title);
+
+
+  function checkBalance(){
+
+    event.preventDefault();
+
+    let seat =document.getElementById("number_of_seats").value;
+
+    if(+seat<=0){
+      
+        alert("Please Select at least One Seat ");
+
+    }
+
+    else{
+        let value=+seat*100;
+        console.log(value);
+
+          if (value>balance){
+              alert("Inscefficient Balance!")
+          }
+          else{
+              alert("Booking Successful!")
+
+              balance=balance-value;
+              document.getElementById("wallet").innerText=balance;
+              localStorage.setItem("amount",balance)
+          }
+
+
+    }
+
+     document.getElementById("user-details").value=null;
+
+     document.getElementById("number_of_seats").value=null;
+
+
+  }
+
+
+
+
+
+
+
+
+</script>

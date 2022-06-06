@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ Practise .in</title>
+
+    <style>
+#navbar{
+    display: flex;
+    justify-content: space-between;
+
+}
+#add-money{
+    width: 40%;
+    margin: auto;
+    text-align: center;
+}
+#amount{
+    margin-bottom: 30px;
+    height: 30px;
+    width: 200px;
+}
+#add_to_wallet{
+    margin-bottom: 30px;
+    height:25px;
+
+}
+
+
+
+    </style>
+
+</head>
+<body>
+
+    <div  id="navbar">
+        <h1>Add Money to Wallet</h1>
+
+        <h1 id="wallet">0</h1>
+
+    </div>
+    <div id="add-money">
+         <input type="number" id="amount" placeholder="Enter the amount"/><br>
+         <button id="add_to_wallet" onclick="wallet()">Add To Wallet</button><br>
+         <a href="movie.html"><button id="book_movie">Book Movie</button></a>
+
+    </div>
+
+    
+</body>
+</html>
+<script>
+let balance=JSON.parse(localStorage.getItem("amount"));
+
+let show_balance=document.getElementById("wallet");
+
+if(balance==undefined){
+    show_balance.innerText=0;
+}
+else {
+    show_balance.innerText=balance;
+
+}
+
+function  wallet(){
+    // console.log("inside function")
+
+    let amount=document.querySelector("#amount").value;
+
+     balance=balance+Number(amount);
+
+     show_balance.innerText=balance;
+
+     document.getElementById("navbar").append(show_balance);
+
+     localStorage.setItem("amount",balance)
+
+     document.querySelector("#amount").value=null;
+     
+
+
+
+}
+
+
+
+
+
+
+</script>
